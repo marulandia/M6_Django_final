@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Todos los productos{% endblock %}
+{% block content %}
+
+<h1>Todos los productos</h1>
+<ul class="list-group">
+  {% for p in productos %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>{{ p.titulo }} — ${{ p.precio }} — {{ p.estado }}</span>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'detalle' p.titulo %}">Ver</a>
+  </li>
+  {% empty %}
+  <li class="list-group-item">No hay publicaciones</li>
+  {% endfor %}
+</ul>
+{% endblock %}

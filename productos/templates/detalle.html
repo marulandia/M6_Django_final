@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ producto.titulo }}</h2>
+  <p>{{ producto.descripcion }}</p>
+  <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+  <p><strong>Estado:</strong> {{ producto.estado }}</p>
+  <p><strong>Vendedor:</strong> {{ producto.vendedor.username }}</p>
+
+  <div class="mt-3 d-flex gap-2">
+    <a href="{% url 'todas' %}" class="btn btn-secondary btn-sm">← Ver todos</a>
+
+    {% if user.is_authenticated and producto.vendedor != user %}
+    <a href="{% url 'contactar' producto.titulo %}" class="btn btn-primary btn-sm">Contactar vendedor</a>
+    {% endif %}
+
+    {% if perms.productos.add_producto %}
+    <a href="{% url 'crear' %}" class="btn btn-success btn-sm">Publicar nuevo</a>
+    {% endif %}
+
+    {% if perms.productos.change_producto and producto.vendedor == user %}
+    <a href="{% url 'editar' producto.titulo %}" class="btn btn-warning btn-sm">Editar</a>
+    {% endif %}
+
+    {% if perms.productos.delete_producto and producto.vendedor == user %}
+    <a href="{% url 'borrar' producto.titulo %}" class="btn btn-danger btn-sm">Eliminar</a>
+    {% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}

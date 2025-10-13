@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h3>Mensajes recibidos</h3>
+  <ul class="list-group">
+    {% for m in mensajes %}
+      <li class="list-group-item">
+        <div><strong>Producto:</strong> {{ m.producto.titulo }}</div>
+        <div><strong>De:</strong> {{ m.remitente.username }} — {{ m.creado|date:"d/m/Y H:i" }}</div>
+        <div class="mt-2">{{ m.contenido }}</div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">Aún no tienes mensajes.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

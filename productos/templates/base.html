@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}TruequeApp{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">TruequeApp</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-3">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="navbar-text">👋 Hola, <strong>{{ user.username }}</strong></span>
+          </li>
+
+          {# ← enlace al admin, solo staff/superuser #}
+          {% if user.is_staff or user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">Administrar</a>
+            </li>
+          {% endif %}
+
+          <li class="nav-item"><a class="nav-link" href="{% url 'todas' %}">Todos</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Salir</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Ingresar</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarse</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<main class="container py-4">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

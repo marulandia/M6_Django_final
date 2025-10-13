@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Nuevo producto{% endblock %}
+{% block content %}
+
+<h1>Nuevo producto</h1>
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+  {{ formulario.as_p }}
+  <button class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}

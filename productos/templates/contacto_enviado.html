@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <div class="alert alert-success">
+    ¡Tu mensaje fue enviado al vendedor de <strong>{{ producto.titulo }}</strong>!
+  </div>
+  <a href="{% url 'detalle' producto.titulo %}" class="btn btn-primary">Volver al producto</a>
+  <a href="{% url 'todas' %}" class="btn btn-outline-secondary">Ver todos</a>
+</div>
+{% endblock %}
